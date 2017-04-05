@@ -1,0 +1,71 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<html>
+    <head>
+        <title>Joke selector</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <script>
+    function showJoke(value){
+        if(value == ""){
+            document.getElementById("info").innerHTML = "";
+            return;
+        }else{
+
+            xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    document.getElementById("info").innerHTML = this.responseText;
+                }
+            };
+
+            xmlhttp.open("GET","getjoke.php?q="+value,true);
+            xmlhttp.send();
+        }
+
+    }
+
+
+    </script>
+    </head>
+    <style>
+    body{
+        text-align: center;
+        background-color: lightgrey;
+        color: green;
+    }
+    .wrapper{
+        width: 60%;
+        margin: 0 auto;
+    }
+    </style>
+    <body>
+        <div class="wrapper">
+        <h1>Get a random joke!</h1>
+        <form>
+        <select name="type" onchange="showJoke(this.value)">
+            <option value="">Select a joke type:</option>
+            <option value="chuck">Chuck Norris</option>
+            <option value="cat">Cat joke</option>
+            <option value="pun">Bad pun</option>
+        </select>
+        </form>
+        <br>
+        <div id="info"><b>Joke will be shown here</b></div>
+    </div>
+    </body>
+
+
+
+
+</html>
