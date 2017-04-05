@@ -16,8 +16,21 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <style>
         body{
+
+            max-width: 60%;
             text-align: center;
-            background-color: rgb(255, 230, 255);
+            background-color: rgb(179, 179, 204);
+        }
+        div{
+            border-style: solid;
+            border-width: 3px;
+            border-radius: 3px;
+            background-color: white;
+        }
+        .complete{
+            border-width: 3px;
+            border-radius: 3px;
+            background-color: green;
         }
         </style>
     </head>
@@ -25,9 +38,10 @@
     <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
         <input type = "text" name="message" placeholder="Enter a task">
         <br/>
-        <input type = "text" name="taskId" placeholder="Delte by id">
+        <input type = "text" name="taskId" placeholder="Delete by id">
         <br/>
         <input type = "txt" name="completeId" placeholder="Complete by id">
+        <br/>
         <input type = "submit" value="Confirm">
     </form>
     <!-- <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="remove">
@@ -83,8 +97,10 @@
                 $completeCheck = "Not completed";
                 if($row["complete"] == 1){
                     $completeCheck = "Completed!";
+                    echo "<div class='complete'><p>" . "Id: " . $row["id"] . "<br/> Task: " . $row["message"] . "<br/> Status: " . $completeCheck . "</p></div>";
+                }else{
+                    echo "<div><p>" . "Id: " . $row["id"] . "<br/> Task: " . $row["message"] . "<br/> Status: " . $completeCheck . "</p></div>";
                 }
-                echo "<p>" . "Id: " . $row["id"] . " Task: " . $row["message"] . " Status: " . $completeCheck . "</p>";
             }
         }
         #Add a task to the database
@@ -140,7 +156,7 @@
 
             }
         }
-
+        #Update task as completed by id
         if(isset($_POST["completeId"])){
             $complet = $_POST["completeId"];
             if($complet != ""){
