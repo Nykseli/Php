@@ -17,23 +17,28 @@
         <style>
         body{
 
-            max-width: 60%;
             text-align: center;
             background-color: rgb(179, 179, 204);
         }
-        div{
+        .notComplete{
             border-style: solid;
             border-width: 3px;
             border-radius: 3px;
             background-color: white;
         }
         .complete{
+            border-style: solid;
             border-width: 3px;
             border-radius: 3px;
             background-color: green;
         }
+        .wrapper{
+            width: 60%;
+            margin: 0 auto;
+        }
         </style>
     </head>
+    <div class="wrapper">
     <h1>ToDoList</h1>
     <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
         <input type = "text" name="message" placeholder="Enter a task">
@@ -44,10 +49,7 @@
         <br/>
         <input type = "submit" value="Confirm">
     </form>
-    <!-- <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="remove">
-        <input type = "text" name="taskId" placeholder="Delte by id">
-        <input type = "submit" value="Delete">
-    </form> -->
+
 
     <?php
         $user = "root";
@@ -99,9 +101,10 @@
                     $completeCheck = "Completed!";
                     echo "<div class='complete'><p>" . "Id: " . $row["id"] . "<br/> Task: " . $row["message"] . "<br/> Status: " . $completeCheck . "</p></div>";
                 }else{
-                    echo "<div><p>" . "Id: " . $row["id"] . "<br/> Task: " . $row["message"] . "<br/> Status: " . $completeCheck . "</p></div>";
+                    echo "<div class='notComplete'><p>" . "Id: " . $row["id"] . "<br/> Task: " . $row["message"] . "<br/> Status: " . $completeCheck . "</p></div>";
                 }
             }
+            echo "<div>";
         }
         #Add a task to the database
         function addTask($task){
@@ -164,29 +167,6 @@
             }
         }
         showTasks();
-        // if($_SERVER["REQUEST_METHOD"] == "POST"){
-        //     $message = htmlspecialchars($_REQUEST["message"]);
-        //     if(strlen($message) > 0){
-        //         addTask($message);
-        //     }
-        //     $remId = htmlspecialchars($_REQUEST["taskId"]);
-        //     if(strlen($remid) > 0){
-        //         removeTask($remId);
-        //     }
-        //     showTasks();
-        //     //echo "<p>" . $message . "</p>";
-        //     resetIncrement();
-        // }
-
-        // if($_SERVER["REQUEST_METHOD"] == "remove"){
-        //     $remId = htmlspecialchars($_REQUEST["taskId"]);
-        //     if(strlen($remid) > 0){
-        //         removeTask($remId);
-        //     }
-        //
-        //     echo "<p>" . $remId . "</p>";
-        //     resetIncrement();
-        // }
 
 
      ?>
